@@ -13,7 +13,7 @@ t = np.arange(t0,t_end + dt, dt)
 
 # Creating x - axis arrays
 x1 = 800*t
-x2 = 400*t**2
+x2 = 1131*t**0.5
 x3 = 200*t**3
 
 # Creating x - axis speed arrays
