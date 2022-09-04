@@ -4,17 +4,26 @@ import matplotlib.animation as animation
 import numpy as np
 
 # Setting up the duration for animation
-t0 = 0 # Starting time (Hours)
+t0 = -1 # Starting time (Hours)
 t_end = 2 # Ending time (Hours)
 dt = 0.005 # increment value for time
 
 # Creating time array
 t = np.arange(t0,t_end + dt, dt)
+for x in range(0,len(t),1):
+    if t[x]<0:
+        t[x]=0
 
 # Creating x - axis arrays
-x1 = 800*t
-x2 = 1131*t**0.5
-x3 = 200*t**3
+c1=300
+c2=700
+c3=900
+i1=3.5
+i2=1.64
+i3=0.1
+x1 = c1*t**i1
+x2 = c2*t**i2
+x3 = c3*t**i3
 
 # Creating x - axis speed arrays
 x_speed1 = np.zeros(len(t))
@@ -167,28 +176,28 @@ distance_counter3 = ax0.text(1370,5,"", size=12, color='r', bbox=square)
 stopwatch3 = ax0.text(1500,5,"", size=12, color='k', bbox=square)
 
 # Subplot properties
-plt.xticks(np.arange(x1[0],x1[-1]+1,(x1[-1]-x1[0])/4),size=8)
+plt.xticks(np.arange(0,1600,400),size=8)
 plt.yticks(np.arange(0,8,1),size=8)
 plt.xlabel("Horizontal Distance [km]", size=10)
 plt.ylabel("Vertical Elevation [km]", size=10)
 plt.title("Airplane Projection", size=12)
 plt.grid(True)
-plt.xlim(x1[0],x1[-1])
+plt.xlim(0,1600)
 plt.ylim(0,8)
 
 
 # Subplot 02
 ax1 = fig.add_subplot(gs[1,0], facecolor=(0.9,0.9,0.9))
 
-x_dist_2_1, = ax1.plot([],[],'b',linewidth=3,label='X=800*t')
+x_dist_2_1, = ax1.plot([],[],'b',linewidth=3,label='X='+str(c1)+'*t^'+str(i1))
 horizontal_line_2_1, = ax1.plot([],[],'b:o',linewidth=2)
 vertical_line_2_1, = ax1.plot([],[],'b:o',linewidth=2)
 
-x_dist_2_2, = ax1.plot([],[],'g',linewidth=3,label='X=400*t^2')
+x_dist_2_2, = ax1.plot([],[],'g',linewidth=3,label='X='+str(c2)+'*t^'+str(i2))
 horizontal_line_2_2, = ax1.plot([],[],'g:o',linewidth=2)
 vertical_line_2_2, = ax1.plot([],[],'g:o',linewidth=2)
 
-x_dist_2_3, = ax1.plot([],[],'r',linewidth=3,label='X=200*t^3')
+x_dist_2_3, = ax1.plot([],[],'r',linewidth=3,label='X='+str(c3)+'*t^'+str(i3))
 horizontal_line_2_3, = ax1.plot([],[],'r:o',linewidth=2)
 vertical_line_2_3, = ax1.plot([],[],'r:o',linewidth=2)
 
