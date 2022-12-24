@@ -12,7 +12,7 @@ dt = 0.005 # increment value for time
 t = np.arange(t0,t_end + dt, dt)
 
 # Creating x - axis array
-x = 100*t**4
+x = 200*t**2
 
 
 # Creating x - axis speed

@@ -5,29 +5,29 @@ import numpy as np
 
 # Setting up the duration for animation
 t0 = 0 # Starting time (Hours)
-t_end = 1 # Ending time (Hours)
+t_end = 10 # Ending time (Hours)
 dt = 0.005 # increment value for time
 
 # Creating time array
 t = np.arange(t0,t_end + dt, dt)
 
 # Parameters
-r1 = 4
-f1 = 2*np.pi
+r1 = 6
+f1 = 0.2*np.pi
 alpha1 = f1*t
 x1 = r1*np.cos(alpha1)
 y1 = r1*np.sin(alpha1)   
 
-r2 = 3
-f2 = 4*np.pi
+r2 = 2
+f2 = 1*np.pi
 alpha2 = (f1+f2)*t
 dx1 = r2*np.cos(alpha2)
 dy1 = r2*np.sin(alpha2)
 x2 = x1+dx1
 y2 = y1+dy1
 
-r3 = 2
-f3 = 8*np.pi
+r3 = 1
+f3 = 2*np.pi
 alpha3 = (f1+f2+f3)*t
 dx2 = r3*np.cos(alpha3)
 dy2 = r3*np.sin(alpha3)

@@ -15,11 +15,10 @@ t = np.arange(t0,t_end + dt, dt)
 # Setting up X & Y arrays
 f1=2*np.pi
 r1=3
-alpha1=0
 phi1=f1*t
-x=r1*np.sin(phi1)*np.cos(alpha1)
-y=r1*np.sin(phi1)*np.sin(alpha1)
-z=r1*np.cos(phi1)
+x=r1*np.cos(phi1)
+y=r1*np.sin(phi1)
+z=t
 
 
 
