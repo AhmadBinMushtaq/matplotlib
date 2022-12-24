@@ -2,35 +2,12 @@ import time
 import serial
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-
-
-class AnimationPlot:
-
-    def animate(self, i, dataList, ser):
-
-        ser.write(b'x')  # Transmit the char 'g' to receive the Arduino data point
-        arduinoData_string = ser.readline().decode('ascii')  # Decode receive Arduino data as a formatted string
-        #print(i)                                           # 'i' is a incrementing variable based upon frames = x argument
-
-        try:
-            arduinoData_float = float(arduinoData_string)  # Convert to float
-            dataList.append(arduinoData_float)  # Add to the list holding the fixed number of points to animate
-
-        except:  # Pass if data point is bad
-            pass
-
-        dataLis…
-[24:19, 12/23/2022] Shehryar: import time
-import serial
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
 import numpy as np
 
 
 class AnimationPlot:
 
     def animate(self, i, dataList, ser):
-
         ser.write(b'x')  # Transmit the char 'g' to receive the Arduino data point
         arduinoData_string = ser.readline().decode('ascii')  # Decode receive Arduino data as a formatted string
         #print(i)                                           # 'i' is a incrementing variable based upon frames = x argument
@@ -61,7 +38,7 @@ dataList = []  # Create empty list variable for later use
 
 
 fig = plt.figure()  # Create Matplotlib plots fig is the 'higher level' plot window
-ax = fig.add_subplot(441)  # Add subplot to main fig window
+ax = fig.add_subplot(221)  # Add subplot to main fig window
 #plt.scatter(x,y)
 #ax = fig.add_subplot(412)
 
@@ -72,7 +49,7 @@ ax = fig.add_subplot(441)  # Add subplot to main fig window
 
 
 #fig.add_subplot(221)   #top left
-fig.add_subplot(442).set_title('2nd graph')  #top right
+fig.add_subplot(222).set_title('2nd graph')  #top right
 plt.xlabel("Average Pulse")
 plt.ylabel("Calorie Burnage")
 xpoints = np.array([0,12000])
@@ -80,75 +57,12 @@ ypoints = np.array([-1000, 1000])
 
 
 
-fig.add_subplot(443).set_title('2nd graph')  #bottom left
+fig.add_subplot(223).set_title('2nd graph')  #bottom left
 plt.xlabel("Average Pulse")
 plt.ylabel("Calorie Burnage")
 
 
-fig.add_subplot(444).set_title('2nd graph')   #bottom right
-plt.xlabel("Average Pulse")
-plt.ylabel("Calorie Burnage")
-
-
-fig.add_subplot(445).set_title('power ')   #bottom right
-plt.xlabel("Average Pulse")
-plt.ylabel("Calorie Burnage")
-
-
-fig.add_subplot(446)   #bottom right
-plt.xlabel("Average Pulse")
-plt.ylabel("Calorie Burnage")
-
-
-fig.add_subplot(447)   #bottom right
-plt.xlabel("Average Pulse")
-plt.ylabel("Calorie Burnage")
-
-
-fig.add_subplot(448)   #bottom right
-plt.xlabel("Average Pulse")
-plt.ylabel("Calorie Burnage")
-
-
-fig.add_subplot(449)   #bottom right
-plt.xlabel("Average Pulse")
-plt.ylabel("Calorie Burnage")
-
-
-
-fig.add_subplot(4,4,10)   #bottom right
-plt.xlabel("Average Pulse")
-plt.ylabel("Calorie Burnage")
-
-
-fig.add_subplot(4,4,11)   #bottom right
-plt.xlabel("Average Pulse")
-plt.ylabel("Calorie Burnage")
-
-
-fig.add_subplot(4,4,12)   #bottom right
-plt.xlabel("Average Pulse")
-plt.ylabel("Calorie Burnage")
-
-
-
-fig.add_subplot(4,4,13)   #bottom right
-plt.xlabel("Average Pulse")
-plt.ylabel("Calorie Burnage")
-
-
-fig.add_subplot(4,4,14)   #bottom right
-plt.xlabel("Average Pulse")
-plt.ylabel("Calorie Burnage")
-
-
-
-fig.add_subplot(4,4,15)   #bottom right
-plt.xlabel("Average Pulse")
-plt.ylabel("Calorie Burnage")
-
-
-fig.add_subplot(4,4,16)   #bottom right
+fig.add_subplot(224).set_title('2nd graph')   #bottom right
 plt.xlabel("Average Pulse")
 plt.ylabel("Calorie Burnage")
 
@@ -171,3 +85,7 @@ ani = animation.FuncAnimation(fig, realTimePlot.animate, frames=100, fargs=(data
 
 plt.show()  # Keep Matplotlib plot persistent on screen until it is closed
 ser.close()
+
+
+
+
