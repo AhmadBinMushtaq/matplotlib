@@ -4,21 +4,17 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 def animate(i, pitch_command_arr, pitch_value_arr, pitch_error_arr, ser):
-    # Read a line from the serial monitor and decode it
-    ser.write(b'1')
-    
-    serial_data = ser.readline().decode('ascii').strip()
-
-    # Split the data by commas and convert to float (double) values
-    values = [float(value) for value in serial_data.split(',')]
-
-    if len(values) == 5:
-        # Unpack the list of values into individual variables
-        Kp, Ki, Kd, pitch_value, pitch_command = values
-
-        print(f"Values: {pitch_command}, {pitch_value}, {Kp}, {Ki}, {Kd}")
-    else:
-        print("Incorrect number of values received.")
+    ser.write(b'1')                                     # Transmit the char 'g' to receive the Arduino data point
+    pitch_command = float(ser.readline().decode('ascii')) # Decode receive Arduino data as a formatted string
+    #print(velocity)
+    ser.write(b'2')
+    pitch_value = float(ser.readline().decode('ascii'))
+    ser.write(b'3')
+    Kp = float(ser.readline().decode('ascii'))
+    ser.write(b'4')
+    Ki = float(ser.readline().decode('ascii'))
+    ser.write(b'5')
+    Kd = float(ser.readline().decode('ascii'))
 
     pitch_command_arr.append(pitch_command)
     pitch_value_arr.append(pitch_value)
@@ -37,6 +33,9 @@ def animate(i, pitch_command_arr, pitch_value_arr, pitch_error_arr, ser):
     # Plot new data frame on the upper subplot
     ax1.plot(pitch_command_arr, color='red', label='Pitch Command')
     ax1.plot(pitch_value_arr, color='blue', label='Pitch Value')
+    square = dict(boxstyle="square", fc=(0.7,0.7,0.7), ec = 'g', lw=2)
+
+    ax1.text(5, -70, "Kp "+str(round(Kp,2))+" Ki "+str(round(Ki,2))+" Kd "+str(round(Kd,2)),size=12, color='b', bbox=square)
     ax1.set_title("Pitch Command and Pitch Value")
     ax1.set_ylabel("Pitch")
     ax1.set_ylim(-90, 90)
@@ -69,7 +68,7 @@ time.sleep(2)
 
 # Matplotlib Animation Function that takes care of real-time plot
 # Note that 'fargs' parameter is where we pass in our arrays and Serial object. 
-ani = animation.FuncAnimation(fig, animate, frames=100, fargs=(pitch_command_arr, pitch_value_arr, pitch_error_arr, ser), interval=20)
+ani = animation.FuncAnimation(fig, animate, frames=100, fargs=(pitch_command_arr, pitch_value_arr, pitch_error_arr, ser), interval=5)
 
 # Keep Matplotlib plot persistent on screen until it is closed
 plt.show()
